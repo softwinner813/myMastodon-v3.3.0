@@ -9,6 +9,19 @@ class HomeController < ApplicationController
     @body_classes = 'app-body'
   end
 
+
+
+  
+  ######################################################################################
+  # @Auth: SoftWinner
+  # @Date: 2021.6.5
+  # @Desc: Controller Fuction for FULL Redirecting to URL of out of mastodon's domain, for example : http:\\outdomain.com
+  ######################################################################################
+  def emailVerificationRedirect
+
+    @redirect_url = (ENV['FULL_REDIRECT_URL'] && ENV['FULL_REDIRECT_URL'] != '' ) ? ENV['FULL_REDIRECT_URL'] : 'http://sitelinez.com'
+  end
+
   private
 
   def redirect_unauthenticated_to_permalinks!

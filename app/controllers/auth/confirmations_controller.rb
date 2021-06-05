@@ -37,10 +37,28 @@ class Auth::ConfirmationsController < Devise::ConfirmationsController
   end
 
   def after_confirmation_path_for(_resource_name, user)
-    if user.created_by_application && truthy_param?(:redirect_to_app)
-      user.created_by_application.redirect_uri
+   
+   
+   
+    ######################################################################################
+    # @Auth: SoftWinner
+    # @Date: 2021.6.5
+    # @Desc: Redirect to other url using ENV variable after confirming email 
+    ######################################################################################
+    
+    # If full redirect to out of mastodon's domain?
+    if ENV['IS_FULL_REDIRECT'] && ENV['IS_FULL_REDIRECT'] == 'true' 
+      '/emailVerificationRedirect/start'
     else
-      super
+      if ENV['REDIRECT_URL'] && ENV['REDIRECT_URL'] != '' # if exist user's redirect url
+        ENV['REDIRECT_URL']
+      else 
+        if user.created_by_application && truthy_param?(:redirect_to_app)
+          user.created_by_application.redirect_uri
+        else
+          super
+        end
+      end
     end
   end
 end
