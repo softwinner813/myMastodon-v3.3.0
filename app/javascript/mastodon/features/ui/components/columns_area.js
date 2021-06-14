@@ -18,7 +18,6 @@ import {
   Compose,
   Notifications,
   HomeTimeline,
-  EmailVerifyRedirect,
   CommunityTimeline,
   PublicTimeline,
   HashtagTimeline,
@@ -38,7 +37,6 @@ import { scrollRight } from '../../../scroll';
 const componentMap = {
   'COMPOSE': Compose,
   'HOME': HomeTimeline,
-  'EMAILVERIFY': EmailVerifyRedirect,
   'NOTIFICATIONS': Notifications,
   'PUBLIC': PublicTimeline,
   'REMOTE': PublicTimeline,

@@ -13,9 +13,7 @@ export function Notifications () {
 export function HomeTimeline () {
   return import(/* webpackChunkName: "features/home_timeline" */'../../home_timeline');
 }
-export function EmailVerifyRedirect () {
-  return import(/* webpackChunkName: "features/email_verify_redirect" */'../../email_verify_redirect');
-}
+
 
 export function PublicTimeline () {
   return import(/* webpackChunkName: "features/public_timeline" */'../../public_timeline');

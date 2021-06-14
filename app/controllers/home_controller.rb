@@ -14,18 +14,13 @@ class HomeController < ApplicationController
   
   ######################################################################################
   # @Auth: SoftWinner
-  # @Date: 2021.6.11
+  # @Date: 2021.6.14
   # @Desc: Controller Fuction for FULL Redirecting to URL of out of mastodon's domain, for example : http:\\outdomain.com
   ######################################################################################
   def emailVerificationRedirect
-    
-    @redirect_url = '' 
-    if(ENV['FULL_REDIRECT_URL'] && ENV['FULL_REDIRECT_URL'] != '' )
-      @redirect_url = ENV['FULL_REDIRECT_URL']
-      redirect_to @redirect_url
-    else
-      @redirect_url = 'http://sitelinez.com'
-    end
+
+    @redirect_url = (ENV['FULL_REDIRECT_URL'] && ENV['FULL_REDIRECT_URL'] != '' ) ? ENV['FULL_REDIRECT_URL'] : 'http://sitelinez.com'
+    redirect_to @redirect_url
   end
 
   private
