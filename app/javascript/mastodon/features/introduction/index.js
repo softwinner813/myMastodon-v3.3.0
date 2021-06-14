@@ -99,6 +99,8 @@ FrameInteractions.propTypes = {
   onNext: PropTypes.func.isRequired,
 };
 
+
+
 export default @connect(state => ({ domain: state.getIn(['meta', 'domain']) }))
 class Introduction extends React.PureComponent {
 
@@ -110,6 +112,8 @@ class Introduction extends React.PureComponent {
   state = {
     currentIndex: 0,
   };
+  
+
 
   componentWillMount () {
     this.pages = [

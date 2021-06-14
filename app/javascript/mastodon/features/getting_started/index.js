@@ -60,6 +60,9 @@ const badgeDisplay = (number, limit) => {
 
 const NAVIGATION_PANEL_BREAKPOINT = 600 + (285 * 2) + (10 * 2);
 
+
+
+
 export default @connect(mapStateToProps, mapDispatchToProps)
 @injectIntl
 class GettingStarted extends ImmutablePureComponent {
@@ -79,6 +82,7 @@ class GettingStarted extends ImmutablePureComponent {
   };
 
   componentDidMount () {
+
     const { fetchFollowRequests, multiColumn } = this.props;
 
     if (!multiColumn && window.innerWidth >= NAVIGATION_PANEL_BREAKPOINT) {
@@ -87,13 +91,18 @@ class GettingStarted extends ImmutablePureComponent {
     }
 
     fetchFollowRequests();
+
   }
+
+
+  
 
   render () {
     const { intl, myAccount, columns, multiColumn, unreadFollowRequests } = this.props;
 
     const navItems = [];
     let height = (multiColumn) ? 0 : 60;
+
 
     if (multiColumn) {
       navItems.push(
@@ -156,6 +165,7 @@ class GettingStarted extends ImmutablePureComponent {
     }
 
     return (
+
       <Column bindToDocument={!multiColumn} label={intl.formatMessage(messages.menu)}>
         {multiColumn && <div className='column-header__wrapper'>
           <h1 className='column-header'>
