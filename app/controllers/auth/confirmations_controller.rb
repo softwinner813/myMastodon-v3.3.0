@@ -17,7 +17,18 @@ class Auth::ConfirmationsController < Devise::ConfirmationsController
   private
 
   def require_unconfirmed!
-    redirect_to edit_user_registration_path if user_signed_in? && current_user.confirmed? && current_user.unconfirmed_email.blank?
+    ######################################################################################
+    # @Auth: SoftWinner
+    # @Date: 2021.6.18
+    # @Desc: Redirect to other url using ENV variable after confirming email in Admin UI
+    ######################################################################################
+    if ENV['IS_FULL_REDIRECT'] && ENV['IS_FULL_REDIRECT'] == 'true'
+      @redirect_url = (ENV['FULL_REDIRECT_URL'] && ENV['FULL_REDIRECT_URL'] != '' ) ? ENV['FULL_REDIRECT_URL'] : 'http://sitelinez.com'
+      redirect_to @redirect_url
+      # redirect_to ENV['IS_FULL_REDIRECT']
+    else
+      redirect_to edit_user_registration_path if user_signed_in? && current_user.confirmed? && current_user.unconfirmed_email.blank?
+    end
   end
 
   def set_body_classes
@@ -25,6 +36,7 @@ class Auth::ConfirmationsController < Devise::ConfirmationsController
   end
 
   def after_resending_confirmation_instructions_path_for(_resource_name)
+
     if user_signed_in?
       if current_user.confirmed? && current_user.approved?
         edit_user_registration_path
@@ -37,7 +49,6 @@ class Auth::ConfirmationsController < Devise::ConfirmationsController
   end
 
   def after_confirmation_path_for(_resource_name, user)
-   
    
    
     ######################################################################################
