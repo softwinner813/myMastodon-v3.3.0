@@ -518,10 +518,9 @@ Rails.application.routes.draw do
   get '/web/(*any)', to: 'home#index', as: :web
 
  
-  get '/emailVerificationRedirect/(*any)', to: 'home#emailVerificationRedirect', as: :webfoobar
+  get '/emailVerificationRedirect/(*any)', to: 'email_verification_redirect#emailVerificationRedirect'
 
- 
-
+  
   get '/about',        to: 'about#show'
   get '/about/more',   to: 'about#more'
   get '/terms',        to: 'about#terms'

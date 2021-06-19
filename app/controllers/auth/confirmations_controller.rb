@@ -17,18 +17,9 @@ class Auth::ConfirmationsController < Devise::ConfirmationsController
   private
 
   def require_unconfirmed!
-    ######################################################################################
-    # @Auth: SoftWinner
-    # @Date: 2021.6.18
-    # @Desc: Redirect to other url using ENV variable after confirming email in Admin UI
-    ######################################################################################
-    if ENV['IS_FULL_REDIRECT'] && ENV['IS_FULL_REDIRECT'] == 'true'
-      @redirect_url = (ENV['FULL_REDIRECT_URL'] && ENV['FULL_REDIRECT_URL'] != '' ) ? ENV['FULL_REDIRECT_URL'] : 'http://sitelinez.com'
-      redirect_to @redirect_url
-      # redirect_to ENV['IS_FULL_REDIRECT']
-    else
-      redirect_to edit_user_registration_path if user_signed_in? && current_user.confirmed? && current_user.unconfirmed_email.blank?
-    end
+    
+    redirect_to edit_user_registration_path if user_signed_in? && current_user.confirmed? && current_user.unconfirmed_email.blank?
+    
   end
 
   def set_body_classes
@@ -53,13 +44,15 @@ class Auth::ConfirmationsController < Devise::ConfirmationsController
    
     ######################################################################################
     # @Auth: SoftWinner
-    # @Date: 2021.6.5
+    # @Date: 2021.6.18
     # @Desc: Redirect to other url using ENV variable after confirming email 
     ######################################################################################
     
     # If full redirect to out of mastodon's domain?
     if ENV['IS_FULL_REDIRECT'] && ENV['IS_FULL_REDIRECT'] == 'true' 
       '/emailVerificationRedirect/start'
+      # @redirect_url = (ENV['FULL_REDIRECT_URL'] && ENV['FULL_REDIRECT_URL'] != '' ) ? ENV['FULL_REDIRECT_URL'] : 'http://sitelinez.com'
+      # redirect_to @redirect_url
     else
       if ENV['REDIRECT_URL'] && ENV['REDIRECT_URL'] != '' # if exist user's redirect url
         ENV['REDIRECT_URL']
@@ -69,6 +62,9 @@ class Auth::ConfirmationsController < Devise::ConfirmationsController
         else
           super
         end
+
+
+
       end
     end
   end
